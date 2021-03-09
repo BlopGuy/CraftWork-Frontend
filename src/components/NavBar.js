@@ -25,7 +25,7 @@ function NavBar({ loggedInUser, setCurrentUser, history }) {
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
                         <a className="navbar-brand">Welcome {loggedInUser.username}</a>
-                        <a className="nav-link" href="user">Profile</a>
+                        <a className="nav-link" href={`profile/${loggedInUser._id}`}>Profile</a>
                         <button class="btn btn-danger" onClick={logoutUser}>Logout</button>
                     </div>
                 </div>

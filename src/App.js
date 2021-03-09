@@ -6,6 +6,10 @@ import { loggedin } from './api';
 import React from 'react';
 import Login from './components/Login';
 import Signup from './components/SignUp';
+import ShopList from './components/ShopList';
+import ShopItems from './components/ShopItems';
+import ProductDetails from './components/ItemDetails';
+import Profile from './components/Profile';
 //import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -48,6 +52,10 @@ function App() {
           }
         }
         />
+        <Route exact path='/shops' component={ShopList} />
+        <Route exact path='/shops/:shopId' component={ShopItems} />
+        <Route exact path='/shops/:shopId/products/:productId' component={ProductDetails}/>
+        <Route exact path='/profile/:userId' component={Profile} />
       </Switch>
     </div>
   )
