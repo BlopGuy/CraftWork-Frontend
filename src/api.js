@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = `http://localhost:5000/api`;
+const baseUrl = `${process.env.REACT_APP_CRAFTWORK_API}/api`;
 
 //Shop Routes
 

@@ -1,12 +1,15 @@
 import React from 'react';
-import { getUser, updateUser, getShop, getProduct, uploadFile } from '../api';
+import { getShop, uploadFile, addProduct, updateShop } from '../api';
 
 
 function AddProduct({ match, history }) {
-    const shopNameRef = React.useRef();
+    const productNameRef = React.useRef();
+    const priceRef = React.useRef();
+    const descriptionRef = React.useRef();
     const [imageUrl, setImageUrl] = React.useState();
-    let user = {};
+    let shop = {};
     const userId = match.params.userId;
+    const shopId = match.params.shopId;
 
 
     const handleFormSubmit = (event) => {
@@ -14,26 +17,27 @@ function AddProduct({ match, history }) {
         const uploadData = new FormData();
         uploadData.append('file', imageUrl);
 
-        getUser(userId)
+        getShop(shopId)
             .then((response) => {
-                user = response.data;
+                shop = response.data;
             });
 
         uploadFile(uploadData)
             .then((response) => {
-                const newShop = {
-                    shopName: shopNameRef.current.value,
+                const newProduct = {
+                    name: productNameRef.current.value,
                     imageUrl: response.data.fileUrl,
-                    productList: [],
-                    ownedBy: userId
+                    ownedBy: shopId,
+                    price: priceRef.current.value,
+                    description: descriptionRef.current.value
                 }
 
-                addShop(newShop)
+                addProduct(newProduct)
                     .then((response) => {
-                        user.shop = response.data._id;
-                        console.log(user);
-                        updateUser(user);
-                        history.push(`/profile/${userId}`);
+                        shop.productList.push(response.data._id);
+                        console.log(shop);
+                        updateShop(shop);
+                        history.push(`/shops/${shopId}`);
                     });
             });
 
@@ -46,17 +50,23 @@ function AddProduct({ match, history }) {
     return (
         <>
             <form onSubmit={handleFormSubmit} encType='multipart/form-data'>
-                <label>Shop's name</label>
-                <input type='text' ref={shopNameRef} />
+                <label>Product name</label>
+                <input type='text' ref={productNameRef} />
+
+                <label>Price</label>
+                <input type='text' ref={priceRef} />
+
+                <label>Description</label>
+                <input type='text' ref={descriptionRef} />
 
                 <label>Image</label>
                 <input type='file' name='imageUrl' onChange={handleFileChange} />
 
-                <button type='submit'>Create</button>
+                <button type='submit'>Add product</button>
             </form>
         </>
     )
 
 }
 
-export default AddShop;
+export default AddProduct;

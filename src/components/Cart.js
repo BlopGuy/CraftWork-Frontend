@@ -14,13 +14,13 @@ function Cart({ match, history }) {
                 });
         }, [match.params.userId]);
 
-    const { username, imageUrl, shoppingCart } = user;
+    const { username, shoppingCart } = user;
     return username ? (
         <>
             <h1>Your shopping Cart</h1>
 
             <div class="row row-cols-1 row-cols-md-5 g-4">
-                {user.shoppingCart.map((productID) => {
+                {shoppingCart.map((productID) => {
                     getProduct(productID)
                         .then((response) => {
                             return (

@@ -48,7 +48,7 @@ function ShopDetails({ match, history }) {
                 )}
             </div>
         </>
-    ) : <p>Loadin...</p>
+    ) : <p>Loading...</p>
 
 }
 
