@@ -20,7 +20,7 @@ export const deleteShop = (id) => {
 }
 
 export const updateShop = (updatedShop) => {
-    return axios.put(`${baseUrl}/shops/${updatedShop.id}`, updatedShop);
+    return axios.put(`${baseUrl}/shops/${updatedShop._id}`, updatedShop);
 }
 
 //User Router
@@ -34,7 +34,7 @@ export const deleteUser = (id) => {
 }
 
 export const updateUser = (updatedUser) => {
-    return axios.put(`${baseUrl}/users/${updatedUser.id}`, updatedUser);
+    return axios.put(`${baseUrl}/users/${updatedUser._id}`, updatedUser);
 }
 
 //Product Routes
@@ -56,7 +56,7 @@ export const deleteProduct = (id) => {
 }
 
 export const updateProduct = (updatedProduct) => {
-    return axios.put(`${baseUrl}/products/${updatedProduct.id}`, updatedProduct);
+    return axios.put(`${baseUrl}/products/${updatedProduct._id}`, updatedProduct);
 }
 
 //Auth Routes
@@ -75,5 +75,9 @@ export const logout = () => {
 
 export const loggedin = () => {
     return axios.get(`${baseUrl}/loggedin`, {withCredentials: true})
+}
+
+export const uploadFile = (uploadData) => {
+    return axios.post(`${baseUrl}/upload`, uploadData);
 }
 

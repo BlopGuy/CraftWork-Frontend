@@ -1,5 +1,6 @@
 import React from 'react';
-import {  getUser, deleteUser, updateUser, addShop } from '../api';
+import { getUser, deleteUser, updateUser, logout } from '../api';
+import { Link } from 'react-router-dom';
 
 
 function Profile({ match, history }) {
@@ -9,22 +10,27 @@ function Profile({ match, history }) {
 
     React
         .useEffect(() => {
-            getProduct(productId)
+            getUser(userId)
                 .then((response) => {
-                    setProduct(response.data);
+                    setUser(response.data);
                 });
-        }, [match.params.productId]);
+        }, [match.params.userId]);
 
-    const handleDeleteProduct = () => {
-        deleteProduct(productId)
+    const handleDeleteUser = () => {
+        deleteUser(userId)
             .then(() => {
-                history.push(`/shops/${shopId}`);
+                history.push(`/`);
+                logout();
             });
     }
 
-    const { name, imageUrl, price } = product;
-    return name ? (
+    const { username } = user;
+    return username ? (
         <>
+        <Link to={`/profile/${userId}/shop/add`}>
+        Create shop
+        </Link>
+        <button onClick={handleDeleteUser}>Delete Account</button>
         </>
     ) : <p>Loading...</p>
 

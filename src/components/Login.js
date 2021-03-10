@@ -27,7 +27,7 @@ function Login({ history, setCurrentUser }) {
                 <label>Username</label>
                 <input type='text' name='username' ref={usernameRef} />
 
-                <label>Username</label>
+                <label>Password</label>
                 <input type='password' name='password' ref={passwordRef} />
 
                 <button type='submit'>Login</button>

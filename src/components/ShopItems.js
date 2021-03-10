@@ -25,7 +25,7 @@ function ShopDetails({ match, history }) {
     return shopName ? (
         <>
             <h2>{shopName}</h2>
-            <img src={imageUrl} alt='shopImg' />
+            <img src={imageUrl} alt='shopImg' style={{width: '300px'}}/>
 
             <div class="row row-cols-1 row-cols-md-5 g-4">
                 {shop.productList.map((productID) => {
@@ -48,7 +48,7 @@ function ShopDetails({ match, history }) {
                 )}
             </div>
         </>
-    ) : <p>Loading...</p>
+    ) : <p>Loadin...</p>
 
 }
 

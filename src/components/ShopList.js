@@ -19,9 +19,9 @@ function ShopList() {
             {shops.map((shop) => {
                 return (
                     <div class="col" key={shop.id}>
-                        <div class="card">
+                        <div class="card"  style={{height: '250px'}}>
                             <Link to={`/shops/${shop._id}`}>
-                                <img src={shop.imageUrl} alt='shopImage' />
+                                <img src={shop.imageUrl} alt='shopImage' style={{width: '100px'}}/>
                                 {shop.shopName}
                             </Link>
                         </div>
@@ -31,7 +31,6 @@ function ShopList() {
             )}
         </div>
     )
-
 }
 
 export default ShopList;

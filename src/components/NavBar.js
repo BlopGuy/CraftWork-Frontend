@@ -1,5 +1,6 @@
 import React from 'react';
 import { logout } from '../api';
+import { Link } from 'react-router-dom';
 
 function NavBar({ loggedInUser, setCurrentUser, history }) {
 
@@ -15,18 +16,30 @@ function NavBar({ loggedInUser, setCurrentUser, history }) {
     return loggedInUser ? (
         //logged in
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
                 <div className="container-fluid">
                     <div className='flex-div' style={{ float: 'left', display: 'inline-block!important' }}>
                         <a className="navbar-brand">CraftWork.You</a>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
-                        <a className="nav-link" href="about">About</a>
-                        <a className="nav-link" href="shops">Shops</a>
+                        <Link className="nav-link active" to='/'>
+                            Home
+                        </Link>
+                        <Link className="nav-link active" to='/about'>
+                            About
+                        </Link>
+                        <Link className="nav-link active" to='/shops'>
+                            Shops
+                        </Link>
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
                         <a className="navbar-brand">Welcome {loggedInUser.username}</a>
-                        <a className="nav-link" href={`profile/${loggedInUser._id}`}>Profile</a>
-                        <button class="btn btn-danger" onClick={logoutUser}>Logout</button>
+                        <a className="navbar-brand .text-dark">You have <span className='text-warning'>{loggedInUser.credits}</span> credits</a>
+                        <Link className="nav-link active" to={`/profile/${loggedInUser._id}`}>
+                            Profile
+                        </Link>
+                        <Link to='/'>
+                            <button class="btn btn-danger" onClick={logoutUser}>Logout</button>
+                        </Link>
+
                     </div>
                 </div>
             </nav>
@@ -37,14 +50,24 @@ function NavBar({ loggedInUser, setCurrentUser, history }) {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <div className='flex-div' style={{ float: 'left', display: 'inline-block!important' }}>
-                        <a className="navbar-brand" href="#">CraftWork.You</a>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
-                        <a className="nav-link" href="about">About</a>
-                        <a className="nav-link" href="shops">Shops</a>
+                        <a className="navbar-brand">CraftWork.You</a>
+                        <Link className="nav-link active" to='/'>
+                            Home
+                        </Link>
+                        <Link className="nav-link active" to='/about'>
+                            About
+                        </Link>
+                        <Link className="nav-link active" to='/shops'>
+                            Shops
+                        </Link>
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
-                        <a className="nav-link" href="login">Login</a>
-                        <a className="nav-link" href="signup">Sign Up</a>
+                        <Link className="nav-link active" to='/login'>
+                            Login
+                        </Link>
+                        <Link className="nav-link active" to='/signup'>
+                            Sign Up
+                        </Link>
                     </div>
 
                 </div>

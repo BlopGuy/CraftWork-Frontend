@@ -10,6 +10,8 @@ import ShopList from './components/ShopList';
 import ShopItems from './components/ShopItems';
 import ProductDetails from './components/ItemDetails';
 import Profile from './components/Profile';
+import AddShop from './components/addShop';
+import Cart from './components/Cart';
 //import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -53,9 +55,11 @@ function App() {
         }
         />
         <Route exact path='/shops' component={ShopList} />
+        <Route exact path='/profile/:userId/shop/add' component={AddShop} />
         <Route exact path='/shops/:shopId' component={ShopItems} />
         <Route exact path='/shops/:shopId/products/:productId' component={ProductDetails}/>
         <Route exact path='/profile/:userId' component={Profile} />
+        <Route exact path='/cart/:userId' component={Cart} />
       </Switch>
     </div>
   )

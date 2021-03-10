@@ -1,8 +1,8 @@
 import React from 'react';
-import { getUser, updateUser, addShop, uploadFile } from '../api';
+import { getUser, updateUser, getShop, getProduct, uploadFile } from '../api';
 
 
-function AddShop({ match, history }) {
+function AddProduct({ match, history }) {
     const shopNameRef = React.useRef();
     const [imageUrl, setImageUrl] = React.useState();
     let user = {};
