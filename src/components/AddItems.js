@@ -16,7 +16,7 @@ function AddProduct({ match, history }) {
                 .then((response) => {
                     setShop(response.data);
                 });
-        }, [match.params.shopId]);
+        }, []);
 
 
     const handleFormSubmit = (event) => {
@@ -59,21 +59,31 @@ function AddProduct({ match, history }) {
 
     return (
         <>
-            <form onSubmit={handleFormSubmit} encType='multipart/form-data'>
-                <label>Product name</label>
-                <input type='text' ref={productNameRef} />
+            <div className='flex-div' style={{ flexDirection: 'column', alignItems: 'center', margin: '50px'}}>
+                <form onSubmit={handleFormSubmit} encType='multipart/form-data' style={{ width: '500px' }}>
+                    <div className="form-group">
+                        <label >Item name</label>
+                        <input type="text" className="form-control" ref={productNameRef} />
+                    </div>
 
-                <label>Price</label>
-                <input type='text' ref={priceRef} />
+                    <div className="form-group">
+                        <label >Price (in credits)</label>
+                        <input type="text" className="form-control" ref={priceRef} />
+                    </div>
 
-                <label>Description</label>
-                <input type='text' ref={descriptionRef} />
+                    <div className="form-group">
+                        <label >Description</label>
+                        <input type="text" className="form-control" ref={descriptionRef} />
+                    </div>
 
-                <label>Image</label>
-                <input type='file' name='imageUrl' onChange={handleFileChange} />
+                    <div className="form-group">
+                        <label >Product image</label>
+                        <input type='file' className="form-control" name='imageUrl' onChange={handleFileChange} />
+                    </div>
 
-                <button type='submit'>Add product</button>
-            </form>
+                    <button type="submit" className="btn btn-primary">Add product</button>
+                </form>
+            </div>
         </>
     )
 

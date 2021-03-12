@@ -81,3 +81,7 @@ export const uploadFile = (uploadData) => {
     return axios.post(`${baseUrl}/upload`, uploadData);
 }
 
+export const getFox = () => {
+    return axios.get('https://randomfox.ca/floof/?ref=apilist.fun');
+}
+

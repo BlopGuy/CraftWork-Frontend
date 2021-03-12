@@ -38,7 +38,7 @@ function ShopDetails({ match, history }) {
             <h2>{shop.shopName}</h2>
             <img src={shop.imageUrl} alt='shopImg' style={{ width: '300px' }} />
 
-            <div className="row row-cols-1 row-cols-md-5 g-4">
+            <div className="row row-cols-1 row-cols-md-5 g-4" style= {{marginLeft: '50px', marginTop: '50px'}}>
                 {shop.productList.map((productId) => {
                     return <ItemRender productID={productId} shopID={shop._id}/>
                 })}

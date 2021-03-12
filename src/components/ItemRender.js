@@ -14,10 +14,10 @@ function ItemRender({ productID, shopID }) {
         }, [productID]);
 
     return product.name ? (
-            <div className="col" key={productID}>
-                <div className="product">
-                    <Link to={`/shops/${shopID}/products/${productID}`}>
-                        <img src={product.imageUrl} alt='shopImage' style={{ height: '100px' }} />
+            <div className="col" key={productID} style={{backgroundColor: 'bisque'}}>
+                <div className="product" style={{backgroundColor: 'BurlyWood', borderRadius: '10px', boxShadow: '2px 5px chocolate'}}>
+                    <Link to={`/shops/${shopID}/products/${productID}`}  style={{textDecoration: 'none', margin: '25px', color: 'grey'}}>
+                        <img src={product.imageUrl} alt='productImage' style={{ height: '75px', borderRadius: '5px' }} />
                         <h2>{product.name}</h2>
                         <p>{product.price}</p>
                     </Link>

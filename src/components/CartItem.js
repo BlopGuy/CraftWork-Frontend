@@ -14,10 +14,10 @@ function CartItem({ productID, remove, index }) {
         }, [productID]);
 
     return (
-            <Link to={`/shops/${product.ownedBy}/products/${product._id}`}>
+            <Link to={`/shops/${product.ownedBy}/products/${product._id}`} style={{height: '75px',display: 'flex', textDecoration: 'none', backgroundColor: 'chocolate'}}>
                 <img src={product.imageUrl} alt='productImage' style={{ height: '50px' }} />
-                <h2>{product.name}</h2>
-                <p style={{ float: 'right' }}>{product.price} Credits</p>
+                <h3>{product.name}</h3>
+                <h3 style={{ float: 'right', color: 'black'}}>{product.price} Credits</h3>
             </Link>
     )
 

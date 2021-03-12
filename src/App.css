@@ -1,5 +1,9 @@
+body {
+  background-color: bisque;
+}
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -30,5 +34,15 @@
 
 .flex-div {
   display: flex;
+}
+
+#mainPage {
+  background-image: url('https://res.cloudinary.com/dl3x6ymyp/image/upload/v1615552067/projects/mothers-day-crafts-1583522306_oenjrs.jpg');
+  background-size: cover;
+}
+
+.border-box {
+  border:1px solid wheat;
+  border-radius: 5px;
 }
 

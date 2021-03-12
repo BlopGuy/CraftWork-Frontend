@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import '../App.css';
 
-function Cart({ match , updateWallet}) {
+function Cart({ match , updateWallet, history}) {
     const [user, setUser] = React.useState({});
     const [amountToPay, setAmount] = React.useState(0);
     const userId = match.params.userId;
@@ -68,7 +68,7 @@ function Cart({ match , updateWallet}) {
 
                                             updateUser(updatedUser)
                                                 .then(() => {
-                                                    console.log('purchase was executed successfuly')
+                                                    history.pushState('/');
                                                 });
 
                                         });
@@ -86,7 +86,7 @@ function Cart({ match , updateWallet}) {
         setUser(user => ({
             ...user,
             shoppingCart: shoppingCart
-        }));
+        }))
     };
 
     return user.username ? (
@@ -97,7 +97,7 @@ function Cart({ match , updateWallet}) {
                 {user.shoppingCart.map((productId) => {
 
                     return (
-                        <li className="list-group-item flex-div" key={productId}>
+                        <li className="list-group-item flex-div" key={productId} style={{backgroundColor: 'chocolate', justifyContent: 'space-between'}}>
                             <CartItem productID={productId} remove={removeFromCart} />
                             {/* <button onClick={removeFromCart()}>Remove</button> */}
                         </li>
@@ -106,7 +106,7 @@ function Cart({ match , updateWallet}) {
 
                 )}
             </ul>
-            <button onClick={executePurchase}>Finish purchase</button>
+            <button onClick={executePurchase} className='btn btn-primary'>Finish purchase</button>
         </>
     ) : <p> Loading ... </p>
 

@@ -23,19 +23,25 @@ function Login({ history, setCurrentUser }) {
 
     return (
         <>
-            <form onSubmit={handleFormSubmit}>
-                <label>Username</label>
-                <input type='text' name='username' ref={usernameRef} />
+            <div className='flex-div' style={{ flexDirection: 'column', alignItems: 'center', margin: '50px'}}>
+                <h1><strong>Login</strong></h1>
+                <form onSubmit={handleFormSubmit} style={{ width: '500px' }}>
+                    <div className="form-group">
+                        <label >Username</label>
+                        <input type="text" className="form-control"  ref={usernameRef} />
+                    </div>
 
-                <label>Password</label>
-                <input type='password' name='password' ref={passwordRef} />
+                    <div className="form-group">
+                        <label >Password</label>
+                        <input type='password' className="form-control" name='password' ref={passwordRef} />
+                    </div>
 
-                <button type='submit'>Login</button>
-            </form>
-
-            <p>Not signed up yet?
+                    <button type="submit" className="btn btn-primary" style={{margin: '25px'}}>login</button>
+                </form>
+                <p>Not signed up yet?
                 <Link to='/signup'>Signup</Link>
-            </p>
+                </p>
+            </div>
         </>
     )
 

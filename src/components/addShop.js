@@ -56,15 +56,21 @@ function AddShop({ match, history }) {
 
     return (
         <>
-            <form onSubmit={handleFormSubmit} encType='multipart/form-data'>
-                <label>Shop's name</label>
-                <input type='text' ref={shopNameRef} />
+            <div className='flex-div' style={{ flexDirection: 'column', alignItems: 'center', margin: '50px'}}>
+                <form onSubmit={handleFormSubmit} encType='multipart/form-data' style={{ width: '500px' }}>
+                    <div className="form-group">
+                        <label >Shop name</label>
+                        <input type="text" className="form-control" ref={shopNameRef} />
+                    </div>
 
-                <label>Image</label>
-                <input type='file' name='imageUrl' onChange={handleFileChange} />
+                    <div className="form-group">
+                        <label >Shop image</label>
+                        <input type='file' className="form-control" name='imageUrl' onChange={handleFileChange} />
+                    </div>
 
-                <button type='submit'>Create</button>
-            </form>
+                    <button type="submit" className="btn btn-primary" style={{margin: '50px'}}>Create</button>
+                </form>
+            </div>
         </>
     )
 

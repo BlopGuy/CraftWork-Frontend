@@ -14,13 +14,6 @@ function ProductDetails({ loggedInUser, match, history }) {
                 });
         }, [match.params.productId]);
 
-    const handleDeleteProduct = () => {
-        deleteProduct(productId)
-            .then(() => {
-                history.push(`/shops/${shopId}`);
-            });
-    }
-
     const AddToCart = () => {
         getUser(loggedInUser._id)
             .then((response) => {
@@ -36,11 +29,17 @@ function ProductDetails({ loggedInUser, match, history }) {
     const { name, imageUrl, price } = product;
     return (
         <>
-            <h1>{name}</h1>
-            <img src={imageUrl} alt='productImage' />
-            <h2>{price}</h2>
-            <button onClick={AddToCart}>Add to cart</button>
+            <div style={{ margin: '50px', justifyContent: 'space-around' }}>
+                <div>
+                    <h1>{name}</h1>
+                    <img src={imageUrl} alt='productImage' style={{ maxWidth: '300px' }} />
+                </div>
+
+                <h2>Price: {price} credits</h2>
+                <button onClick={AddToCart} className='btn btn-primary'>Add to cart</button>
+            </div>
         </>
+
     )
 
 }

@@ -16,8 +16,10 @@ function EditShop({ match, history }) {
             getShop(shopId)
                 .then((response) => {
                     setShop(response.data);
+                    console.log(response.data);
+                    console.log(shop);
                 });
-        }, [match.params.shopId]);
+        }, []);
 
     const handleDeleteShop = () => {
         deleteShop(shopId)
@@ -71,24 +73,37 @@ function EditShop({ match, history }) {
 
     return shop.shopName ? (
         <>
-            <div>
-                <img src={shop.imageUrl} alt='shopCurrImage' style={{ width: '175px' }} />
-                <h2>{shop.shopName}</h2>
+            <div className='flex-div' style={{ marginTop: '5%', justifyContent: 'center' }}>
+                <div>
+                    <div>
+                        <img src={shop.imageUrl} alt='Insert Image' style={{ width: '175px', borderRadius: '15px', margin: '50px' }} />
+                        <h2>{shop.shopName}</h2>
+                    </div>
+                </div>
+                <div className='flex-div' style={{ flexDirection: 'column', margin: '50px' }}>
+                    <form onSubmit={handleFormSubmit} encType='multipart/form-data' style={{ width: '500px' }}>
+                        <div className="form-group">
+                            <label >Shop name</label>
+                            <input type="text" className="form-control" placeholder="update your shop's name" ref={shopNameRef} />
+                        </div>
+
+                        <div className="form-group">
+                            <label >Shop picture</label>
+                            <input type='file' className="form-control" name='imageUrl' onChange={handleFileChange} />
+                        </div>
+
+                        <button type="submit" className="btn btn-primary" style={{margin: '50px'}}>Submit</button>
+                    </form>
+                    <div className='flex-div' style={{ justifyContent: 'center', marginTop: '200px' }}>
+                        <Link to={`/profile/${userId}/shop/${shopId}/additem`}>
+                            <button className='btn btn-primary'>Add a product</button>
+                        </Link>
+                        <div>
+                            <button onClick={handleDeleteShop}  className="btn btn-danger">Close Shop</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form onSubmit={handleFormSubmit} encType='multipart/form-data'>
-                <label>Shop Name</label>
-                <input type='text' name='shopName' ref={shopNameRef} placeholder={shop.shopName} />
-
-                <label>Image</label>
-                <input type='file' name='imageUrl' onChange={handleFileChange} />
-
-                <button type='submit'>Update</button>
-            </form>
-            <Link to={`/profile/${userId}/shop/${shopId}/additem`}>
-                Add a product to your shop
-            </Link>
-
-            <button onClick={handleDeleteShop}>Close Shop</button>
         </>
     ) : <p>Loading...</p>
 

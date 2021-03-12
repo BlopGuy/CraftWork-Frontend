@@ -16,30 +16,27 @@ function NavBar({ loggedInUser, setCurrentUser}) {
     return loggedInUser ? (
         //logged in
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
+            <nav className="navbar navbar-expand-lg navbar-light bg-dark">
                 <div className="container-fluid">
                     <div className='flex-div' style={{ float: 'left', display: 'inline-block!important' }}>
-                        <a className="navbar-brand">CraftWork.You</a>
-                        <Link className="nav-link active" to='/'>
+                        <a className="navbar-brand text-warning"><strong>CraftWork.You</strong></a>
+                        <Link className="nav-link active text-info" to='/'>
                             Home
                         </Link>
-                        <Link className="nav-link active" to='/about'>
-                            About
-                        </Link>
-                        <Link className="nav-link active" to='/shops'>
+                        <Link className="nav-link active text-info" to='/shops'>
                             Shops
                         </Link>
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
-                        <a className="navbar-brand">Welcome {loggedInUser.username}</a>
-                        <Link className="nav-link" to={`/profile/${loggedInUser._id}`}>
+                        <a className="navbar-brand text-light">Welcome CraftWorker!</a>
+                        <Link className="nav-link text-info" to={`/profile/${loggedInUser._id}`}>
                             Profile
                         </Link>
-                        <Link className="nav-link" to={`/cart/${loggedInUser._id}`}>
+                        <Link className="nav-link text-info" to={`/cart/${loggedInUser._id}`}>
                             Cart
                         </Link>
                         <Link to='/'>
-                            <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
+                            <button className="btn btn-outline-danger" onClick={logoutUser}>Logout</button>
                         </Link>
 
                     </div>
@@ -49,25 +46,22 @@ function NavBar({ loggedInUser, setCurrentUser}) {
     ) : (
         //unlogged in
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-dark">
                 <div className="container-fluid">
                     <div className='flex-div' style={{ float: 'left', display: 'inline-block!important' }}>
-                        <a className="navbar-brand">CraftWork.You</a>
-                        <Link className="nav-link active" to='/'>
+                    <a className="navbar-brand text-warning"><strong>CraftWork.You</strong></a>
+                        <Link className="nav-link active text-info" to='/'>
                             Home
                         </Link>
-                        <Link className="nav-link active" to='/about'>
-                            About
-                        </Link>
-                        <Link className="nav-link active" to='/shops'>
+                        <Link className="nav-link active text-info" to='/shops'>
                             Shops
                         </Link>
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
-                        <Link className="nav-link active" to='/login'>
+                        <Link className="nav-link active text-info" to='/login'>
                             Login
                         </Link>
-                        <Link className="nav-link active" to='/signup'>
+                        <Link className="nav-link active text-info" to='/signup'>
                             Sign Up
                         </Link>
                     </div>
