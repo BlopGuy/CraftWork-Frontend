@@ -5,19 +5,22 @@ import { getUser, updateUser, addShop, uploadFile } from '../api';
 function AddShop({ match, history }) {
     const shopNameRef = React.useRef();
     const [imageUrl, setImageUrl] = React.useState();
-    let user = {};
+    const [user, setUser] = React.useState();
     const userId = match.params.userId;
 
+
+    React
+        .useEffect(() => {
+            getUser(userId)
+                .then((response) => {
+                    setUser(response.data);
+                });
+        }, []);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const uploadData = new FormData();
         uploadData.append('file', imageUrl);
-
-        getUser(userId)
-            .then((response) => {
-                user = response.data;
-            });
 
         uploadFile(uploadData)
             .then((response) => {
@@ -30,10 +33,18 @@ function AddShop({ match, history }) {
 
                 addShop(newShop)
                     .then((response) => {
-                        user.shop = response.data._id;
-                        console.log(user);
-                        updateUser(user);
-                        history.push(`/profile/${userId}`);
+                        let updatedUser = {
+                            _id: userId,
+                            username: user.username,
+                            password: user.password,
+                            credits: user.credits,
+                            shoppingCart: user.shoppingCart,
+                            shop: response.data._id
+                        }
+                        updateUser(updatedUser)
+                            .then(() => {
+                                history.push(`/profile/${userId}`);
+                            });
                     });
             });
 

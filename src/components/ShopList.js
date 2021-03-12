@@ -15,11 +15,11 @@ function ShopList() {
         }, []);
 
     return (
-        <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div className="row row-cols-1 row-cols-md-5 g-4">
             {shops.map((shop) => {
                 return (
-                    <div class="col" key={shop.id}>
-                        <div class="card"  style={{height: '250px'}}>
+                    <div className="col" key={shop._id}>
+                        <div className="card"  style={{height: '250px'}}>
                             <Link to={`/shops/${shop._id}`}>
                                 <img src={shop.imageUrl} alt='shopImage' style={{width: '100px'}}/>
                                 {shop.shopName}
@@ -27,8 +27,7 @@ function ShopList() {
                         </div>
                     </div>
                 )
-            }
-            )}
+            })}
         </div>
     )
 }

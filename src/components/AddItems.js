@@ -7,20 +7,22 @@ function AddProduct({ match, history }) {
     const priceRef = React.useRef();
     const descriptionRef = React.useRef();
     const [imageUrl, setImageUrl] = React.useState();
-    let shop = {};
-    const userId = match.params.userId;
+    const [shop, setShop] = React.useState();
     const shopId = match.params.shopId;
+
+    React
+        .useEffect(() => {
+            getShop(shopId)
+                .then((response) => {
+                    setShop(response.data);
+                });
+        }, [match.params.shopId]);
 
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const uploadData = new FormData();
         uploadData.append('file', imageUrl);
-
-        getShop(shopId)
-            .then((response) => {
-                shop = response.data;
-            });
 
         uploadFile(uploadData)
             .then((response) => {
@@ -34,10 +36,18 @@ function AddProduct({ match, history }) {
 
                 addProduct(newProduct)
                     .then((response) => {
-                        shop.productList.push(response.data._id);
-                        console.log(shop);
-                        updateShop(shop);
-                        history.push(`/shops/${shopId}`);
+                        let tempArray = [...shop.productList];
+                        tempArray.push(response.data._id);
+                        let updatedShop = {
+                            _id: shopId,
+                            shopName: shop.username,
+                            imageUrl: shop.imageUrl,
+                            productList: tempArray
+                        }
+                        updateShop(updatedShop)
+                            .then(() => {
+                                history.push(`/shops/${shopId}`);
+                            })
                     });
             });
 

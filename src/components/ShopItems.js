@@ -1,6 +1,7 @@
 import React from 'react';
-import { getShop, deleteShop, getProduct } from '../api';
+import { getShop, getProduct } from '../api';
 import { Link } from 'react-router-dom';
+import ItemRender from './ItemRender';
 
 function ShopDetails({ match, history }) {
     const [shop, setShop] = React.useState({});
@@ -12,40 +13,35 @@ function ShopDetails({ match, history }) {
                 .then((response) => {
                     setShop(response.data);
                 });
-        }, [match.params.shopId]);
+        }, []);
 
-    const handleDeleteShop = (id) => {
-        deleteShop(id)
-            .then(() => {
-                history.push('/shops');
-            });
+    const productRender = (productId) => {
+        getProduct(productId)
+            .then((response) => {
+                return (
+                    <div className="col" key={productId}>
+                        <div className="product">
+                            <Link to={`/shops/${shop._id}/products/${response.data._id}`}>
+                                <img src={response.data.imageUrl} alt='shopImage' />
+                                <h2>{response.data.name}</h2>
+                                <p>{response.data.price}</p>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            })
     }
 
-    const { _id, shopName, imageUrl } = shop;
-    return shopName ? (
+
+    return shop.shopName ? (
         <>
-            <h2>{shopName}</h2>
-            <img src={imageUrl} alt='shopImg' style={{width: '300px'}}/>
+            <h2>{shop.shopName}</h2>
+            <img src={shop.imageUrl} alt='shopImg' style={{ width: '300px' }} />
 
-            <div class="row row-cols-1 row-cols-md-5 g-4">
-                {shop.productList.map((productID) => {
-                    getProduct(productID)
-                        .then((response) => {
-                            return (
-                                <div class="col" key={_id}>
-                                    <div class="product">
-                                        <Link to={`/shops/${shop._id}/products/${response._id}`}>
-                                            <img src={response.imageUrl} alt='shopImage' />
-                                            <h2>{response.name}</h2>
-                                            <p>{response.price}</p>
-                                        </Link>
-                                    </div>
-                                </div>
-                            )
-                        })
-
-                }
-                )}
+            <div className="row row-cols-1 row-cols-md-5 g-4">
+                {shop.productList.map((productId) => {
+                    return <ItemRender productID={productId} shopID={shop._id}/>
+                })}
             </div>
         </>
     ) : <p>Loading...</p>

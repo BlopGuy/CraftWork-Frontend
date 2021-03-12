@@ -2,8 +2,8 @@ import React from 'react';
 import { logout } from '../api';
 import { Link } from 'react-router-dom';
 
-function NavBar({ loggedInUser, setCurrentUser, history }) {
-
+function NavBar({ loggedInUser, setCurrentUser}) {
+    
 
     const logoutUser = () => {
         logout()
@@ -32,12 +32,14 @@ function NavBar({ loggedInUser, setCurrentUser, history }) {
                     </div>
                     <div className='flex-div' style={{ float: 'right', display: 'inline-block!important' }}>
                         <a className="navbar-brand">Welcome {loggedInUser.username}</a>
-                        <a className="navbar-brand .text-dark">You have <span className='text-warning'>{loggedInUser.credits}</span> credits</a>
-                        <Link className="nav-link active" to={`/profile/${loggedInUser._id}`}>
+                        <Link className="nav-link" to={`/profile/${loggedInUser._id}`}>
                             Profile
                         </Link>
+                        <Link className="nav-link" to={`/cart/${loggedInUser._id}`}>
+                            Cart
+                        </Link>
                         <Link to='/'>
-                            <button class="btn btn-danger" onClick={logoutUser}>Logout</button>
+                            <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
                         </Link>
 
                     </div>

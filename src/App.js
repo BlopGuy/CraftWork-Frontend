@@ -1,4 +1,3 @@
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { ToastContainer } from 'react-toastify';
@@ -7,15 +6,18 @@ import React from 'react';
 import Login from './components/Login';
 import Signup from './components/SignUp';
 import ShopList from './components/ShopList';
-import ShopItems from './components/ShopItems';
+import ShopDetails from './components/ShopItems';
 import ProductDetails from './components/ItemDetails';
 import Profile from './components/Profile';
 import AddShop from './components/addShop';
 import Cart from './components/Cart';
+import EditShop from './components/EditShop';
+import addProduct from './components/AddItems';
 //import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [loggedInUser, setloggedInUser] = React.useState(null);
+ 
 
   const setCurrentUser = (user) => {
     setloggedInUser(user);
@@ -28,15 +30,18 @@ function App() {
           .then((response) => {
             if (response.data._id) {
               setCurrentUser(response.data);
+              
             }
           });
       }
     });
 
+ 
+
   return (
     <div className="App">
       <ToastContainer />
-      <NavBar loggedInUser={loggedInUser} setCurrentUser={setCurrentUser} />
+      <NavBar loggedInUser={loggedInUser} setCurrentUser={setCurrentUser}/>
       <Switch>
         <Route exact path='/login' render={
           (props) => {
@@ -55,11 +60,22 @@ function App() {
         }
         />
         <Route exact path='/shops' component={ShopList} />
-        <Route exact path='/profile/:userId/shop/add' component={AddShop} />
-        <Route exact path='/shops/:shopId' component={ShopItems} />
-        <Route exact path='/shops/:shopId/products/:productId' component={ProductDetails}/>
+        <Route exact path='/shops/:shopId' component={ShopDetails} />
+        <Route exact path='/shops/:shopId/products/:productId' render={
+          (props) => {
+            return <ProductDetails {...props} loggedInUser={loggedInUser} />
+          }
+        }
+        />
         <Route exact path='/profile/:userId' component={Profile} />
-        <Route exact path='/cart/:userId' component={Cart} />
+        <Route exact path='/profile/:userId/shop/add' component={AddShop} />
+        <Route exact path='/profile/:userId/shop/:shopId' component={EditShop} />
+        <Route exact path='/profile/:userId/shop/:shopId/additem' component={addProduct} />
+        <Route exact path='/cart/:userId' render={
+          () => {
+            <Cart />
+          }
+        }/>
       </Switch>
     </div>
   )

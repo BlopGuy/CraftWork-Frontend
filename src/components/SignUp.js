@@ -27,7 +27,7 @@ function Signup({ history }) {
                 <label>Password</label>
                 <input type='password' name='password' ref={passwordRef} />
 
-                <button type='submit'>Login</button>
+                <button type='submit'>SignUp</button>
             </form>
 
             <p>Already have an account?
